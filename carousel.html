@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>向上滚动轮播图效果实现</title>  
+    <style>
+        #banner1 { position: relative; width: 980px; height: 25px; line-height: 25px; overflow: hidden; margin: 0px auto 50px; padding: 0; border: 1px solid red; }
+        #banner1 ol { position: absolute; top: 0px; left: 0px; margin: 0; padding: 0; }
+        #banner1 ol li { padding: 0; margin: 0; height: 25px; line-height: 25px; }
+    </style>
+</head>
+<body>
+    <div id="banner1">
+        <ol>
+            <li>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+            <li>bbbbbbbbbbbbbbbbbbbbbbbbbbbb</li>
+            <li>cccccccccccccccccccccccccccccc</li>
+            <li>dddddddddddddddddddddddddddddd</li>
+        </ol>
+    </div>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script>
+        (function () {
+            var timer;
+            var wrap = $("#banner1 ol");
+            var len = $("#banner1 ol li").length;
+            if (len <= 1) {
+                return;
+            }
+
+            $("#banner1").hover(function () {
+                clearInterval(timer);
+                },
+                    function () {
+
+                        timer = setInterval(function () {
+
+                            var field = wrap.find('li:first'); //此变量不可放置于函数起始处,li:first取值是变化的
+                            var height = field.height(); //取得每次滚动高度(多行滚动情况下,此变量不可置于开始处,否则会有间隔时长延时)
+                            field.animate({
+                                marginTop: -height + 'px'
+                            },
+                                500,
+                                function () { //通过取负margin值,隐藏第一行
+                                    field.css('marginTop', 0).appendTo(wrap); //隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
+                                });
+
+                        },
+        2000);
+                    }
+                ).trigger("mouseleave");
+        })();
+    </script>
+
+</body>
+</html>
