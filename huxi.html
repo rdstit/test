@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#div1{
+				background-color: greenyellow;
+				width:200px;
+				height:200px;
+				
+				}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+		
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script>
+		;(function ($,elmId,millisec) {
+			$(function () {
+			var $div1=$('#'+elmId),opacity=1 ,b;
+		    setInterval(function () {
+				if(b){
+					opacity=opacity+0.1;
+					if(opacity>=1) b=false;
+				}
+				else{
+					opacity=opacity-0.1;
+				    if(opacity<=0.3) b=true;
+				}
+				$div1.css('opacity',opacity.toFixed(1))
+		     },millisec);
+			})
+		})(jQuery,"div1",200)
+		
+		</script>
+	</body>
+
+</html>
